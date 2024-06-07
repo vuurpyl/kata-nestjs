@@ -7,7 +7,6 @@ import { Repository } from 'typeorm';
 export class EventsService {
   constructor(
     @InjectRepository(Events)
-    private eventsRepository: Repository<Events>,
-    private readonly logger: LoggerService
+    private eventsRepository: Repository<Events>
   ) {}
 }

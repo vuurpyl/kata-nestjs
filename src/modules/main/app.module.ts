@@ -1,16 +1,22 @@
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CommonModule } from 'referral-pulse-commons';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { Events } from '../events/events.entity';
+import { EventsModule } from '../events/events.module';
 import { HealthController } from '../health/health.controller';
 import { Module } from '@nestjs/common';
-import { ReferralEvents } from '../referral-events/referral.events.entity';
-import { ReferralEventsModule } from '../referral-events/referral.events.module';
 import { TerminusModule } from '@nestjs/terminus';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import app from '../../config/app.config';
+import database from '../../config/database.config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      cache: true,
+      load: [app, database],
+    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
@@ -20,24 +26,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         username: configService.getOrThrow<string>('database.username'),
         password: configService.getOrThrow<string>('database.password'),
         database: configService.getOrThrow<string>('database.database'),
-        entities: [ReferralEvents],
+        entities: [Events],
         migrationsRun: configService.getOrThrow<boolean>(
           'database.migrationsRun'
         ),
         logging: configService.getOrThrow<boolean>('database.logging'),
         synchronize: true,
-        /* ssl: true,
-        extra: {
-          ssl: {
-            rejectUnauthorized: false
-          }
-        } */
       }),
       inject: [ConfigService],
     }),
     TerminusModule,
-    ReferralEventsModule,
-    CommonModule,
+    EventsModule,
   ],
   controllers: [AppController, HealthController],
   providers: [AppService],

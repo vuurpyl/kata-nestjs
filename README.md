@@ -1,6 +1,6 @@
 1. run: docker compose up
 2. run dans un autre console: npm install
-3. run: npm run start
+3. run: npm run start:dev
 4. go to: localhost:3001/api/events/docs you will see swagger
 
 Exercices

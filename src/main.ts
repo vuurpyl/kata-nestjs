@@ -28,7 +28,7 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api/events/docs', app, document);
-  await app.listen(3004, () => {
+  await app.listen(3001, () => {
     logger.log(`Event Server is listening to port 3004...`);
   });
 }
