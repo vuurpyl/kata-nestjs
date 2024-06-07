@@ -20,7 +20,7 @@ import database from '../../config/database.config';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
-        type: 'cockroachdb',
+        type: 'postgres',
         host: configService.getOrThrow<string>('database.host'),
         port: configService.getOrThrow<number>('database.port'),
         username: configService.getOrThrow<string>('database.username'),

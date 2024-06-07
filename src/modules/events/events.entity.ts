@@ -1,4 +1,4 @@
-import { Column, DeleteDateColumn, Entity } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 import { IsEnum, IsNotEmpty } from 'class-validator';
 
@@ -12,6 +12,9 @@ export enum EventTypes {
   name: 'events',
 })
 export class Events {
+  @PrimaryGeneratedColumn()
+  id: number;
+
   @Column({ name: 'name' })
   name: string;
 
