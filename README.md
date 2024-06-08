@@ -9,3 +9,4 @@ Exercices
 3. Protect the api by accepting only http requests that have a header "Authorization: Basic bG9naW46cGFzcw==" ottherwise throw 401 exception
 4. Add event moderators entity. one event have many moderators. A moderator is defined by firstname, lastname, email, phone.
 We want create and associate a moderator to an event via POST http://localhost:3001/api/events/{eventId}/moderators
+5. get the code, date and moderator of all events within a giving day ordered by original Timestamp the URL looks something like this: localhost:3001/api/events/24-06-2024
