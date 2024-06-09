@@ -2,6 +2,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Events } from '../events/events.entity';
+import { Moderator } from '../moderator/moderator.entity';
 import { EventsModule } from '../events/events.module';
 import { HealthController } from '../health/health.controller';
 import { Module } from '@nestjs/common';
@@ -26,7 +27,7 @@ import database from '../../config/database.config';
         username: configService.getOrThrow<string>('database.username'),
         password: configService.getOrThrow<string>('database.password'),
         database: configService.getOrThrow<string>('database.database'),
-        entities: [Events],
+        entities: [Events, Moderator],
         migrationsRun: configService.getOrThrow<boolean>(
           'database.migrationsRun'
         ),
